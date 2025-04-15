@@ -24,7 +24,10 @@
 </details>
 <details>
   <summary>Delny</summary>
-  <img src="/wows/commanderskill/images/delny.png">
+  Without Fearless<br>
+  <img src="/wows/commanderskill/images/delny.png"><br>
+  With Fearless<br>
+  <img src="/wows/commanderskill/images/delny-fearless.png">
 </details>
 <details>
   <summary>Gdansk</summary>
@@ -34,11 +37,25 @@
   <summary>Harugumo</summary>
   <img src="/wows/commanderskill/images/harugumo.png">
 </details>
+<details>
+  <summary>Yue Yang</summary>
+  <img src="/wows/commanderskill/images/yueyang.png">
+</details>
+<details>
+  <summary>Khabarovsk</summary>
+  With RPF<br>
+  <img src="/wows/commanderskill/images/khabarovsk.png"><br>
+  Without RPF (Supported by others)<br>
+  <img src="/wows/commanderskill/images/khabarovsk-rpf.png">
+</details>
 
 ### CB/KOTS - Cruiser
 <details>
   <summary>Brisbane</summary>
-  <img src="/wows/commanderskill/images/brisbane.png">\
+  Original<br>
+  <img src="/wows/commanderskill/images/brisbane.png"><br>
+  Enhanced Torp Build<br>
+  <img src="/wows/commanderskill/images/brisbane-torp.png">
 </details>
 <details>
   <summary>San Martin</summary>
@@ -48,3 +65,27 @@
   <summary>Des Moines</summary>
   <img src="/wows/commanderskill/images/desmoines.png">
 </details>
+<details>
+  <summary>Minotaur</summary>
+  <img src="/wows/commanderskill/images/minotaur.png">
+</details>
+<details>
+  <summary>Moskva</summary>
+  <img src="/wows/commanderskill/images/moskva.png">
+</details>
+
+### CB/KOTS - Battleship
+<details>
+  <summary>Schlieffen</summary>
+  <img src="/wows/commanderskill/images/schlieffen.png"><br>
+</details>
+<details>
+  <summary>C. Colombo</summary>
+  <img src="/wows/commanderskill/images/colombo.png">
+</details>
+<details>
+  <summary>St. Vincent</summary>
+  <img src="/wows/commanderskill/images/stvincent.png">
+</details>
+
+
