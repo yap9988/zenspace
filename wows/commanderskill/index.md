@@ -1,7 +1,7 @@
 ### Items
 <details>
-  <summary>Spoiler warning</summary>
-  Wording here  
+  <summary>Ragnar</summary>
+  ![Ragnar](/wows/commanderskill/images/ragnar.png)
 </details>
 <details>
   <summary>Spoiler warning</summary>
