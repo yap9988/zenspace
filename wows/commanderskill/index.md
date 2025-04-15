@@ -15,7 +15,7 @@
   <img src="/wows/commanderskill/images/daring-dazzle.png">
 </details>
 <details>
-  <summary>A. Regolo - All rounded</summary>
+  <summary>A. Regolo</summary>
   <img src="/wows/commanderskill/images/regolo-allarounded.png">
 </details>
 <details>
