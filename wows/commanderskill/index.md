@@ -2,16 +2,16 @@
 ### CB/KOTS - Destroyer
 <details>
   <summary>Ragnar</summary>
-  With RPF\
-  <img src="/wows/commanderskill/images/ragnar.png">\
-  Without RPF (Supported by others)\
+  With RPF<br>
+  <img src="/wows/commanderskill/images/ragnar.png"><br>
+  Without RPF (Supported by others)<br>
   <img src="/wows/commanderskill/images/ragnar.png">
 </details>
 <details>
   <summary>Daring</summary>
-  Without Dazzle
-  <img src="/wows/commanderskill/images/daring.png">\
-  With Dazzle\
+  Without Dazzle<br>
+  <img src="/wows/commanderskill/images/daring.png"><br>
+  With Dazzle<br>
   <img src="/wows/commanderskill/images/daring-dazzle.png">
 </details>
 <details>
