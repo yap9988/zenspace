@@ -2,4 +2,4 @@ test
 
 
 
-(/assets/images/cy2020ruscoml20.png)
+!(/assets/images/cy2020ruscoml20.png)
