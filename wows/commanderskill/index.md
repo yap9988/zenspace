@@ -9,6 +9,7 @@
   ```
   
 </details>
+
 2. <details>
   <summary>Spoiler warning</summary>
   
