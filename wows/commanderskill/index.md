@@ -1,10 +1,10 @@
-### Commander Skills
-## Destroyer
+## Commander Skills
+### Destroyer
 <details>
   <summary>Ragnar</summary>
   <img src="/wows/commanderskill/images/ragnar.png">
 </details>
 <details>
-  <summary>Spoiler warning</summary>
-  Wording here
+  <summary>A.Regolo - All rounded build</summary>
+  <img src="/wows/commanderskill/images/regolo-allarounded.png">
 </details>
