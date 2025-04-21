@@ -1408,12 +1408,16 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
   wind01 = iStochastic(symbolName,0,14,3,3,MODE_SMA,0,MODE_MAIN,0);
   wind02 = iStochastic(symbolName,0,14,3,3,MODE_SMA,0,MODE_SIGNAL,0);
 
-  if (wind11>wind12 && wind01<wind02 && wind01>=60)
+
+  //if (wind11>wind12 && wind01<wind02 && wind01>=60)
+  if (wind11>wind12 && wind01<wind02)
   {
   FVGArrayRef[symbolIndex][0]=-1;
   FVGArrayRef[symbolIndex][1]=wind11;
   }
-  if (wind11<wind12 && wind01>wind02 &&wind01 <=40)
+  
+  //if (wind11<wind12 && wind01>wind02 &&wind01 <=40)
+  if (wind11<wind12 && wind01>wind02 )
   {
   FVGArrayRef[symbolIndex][0]=1;
   FVGArrayRef[symbolIndex][1]=wind11;
