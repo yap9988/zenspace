@@ -1425,7 +1425,7 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
 
 
 
-
+/*
 
   if (wind11>wind12 && wind01<wind02 && wind01<60)
   {
@@ -1437,7 +1437,7 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
   FVGArrayRef[symbolIndex][0]=0;
   FVGArrayRef[symbolIndex][1]=0;
   }
-
+*/
 
 
 
