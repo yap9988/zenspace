@@ -1841,7 +1841,7 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
     for (int f = 0; f < 1000; f++)
     {
    // if (((iClose(symbolName,0,0)< bearOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bearOBdown[symbolIndex][f])))
-    if ((iHigh(symbolName,0,0)> bearOBup[symbolIndex][f]) )
+    if ((iHigh(symbolName,0,0)> bearOBup[symbolIndex][f]) && (iOpen(symbolName,0,0)<bearOBup[symbolIndex][f] || iClose(symbolName,0,1)<bearOBup[symbolIndex][f] ))
     {
 
 
@@ -1856,7 +1856,7 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
     
     
     //if (((iClose(symbolName,0,0)< bullOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bullOBdown[symbolIndex][f])))
-    if (iLow(symbolName,0,0)< bullOBdown[symbolIndex][f])
+    if (iLow(symbolName,0,0)< bullOBdown[symbolIndex][f]&& (iOpen(symbolName,0,0)>bullOBdown[symbolIndex][f] || iClose(symbolName,0,1)>bullOBdown[symbolIndex][f] ))
     {
    
   
