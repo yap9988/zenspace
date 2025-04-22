@@ -1218,7 +1218,7 @@ string pTypeD;
           timepower = TimeToString(power2, TIME_SECONDS | TIME_DATE);
         //  string messageAlert=symbol+pType+"S:"+power+","+timepower+"(SMC1H)"+"D: "+pTypeD+"|S:"+stt+"|"+firstc+":"+firstS[symbolIndex][0]+st1+","+lastc+":"+secondS[symbolIndex][0]+st2;
             //string messageAlert=symbol+pType+" (15M) S:"+power+","+timepower+"(SMC1H)";
-           string messageAlert=symbol+pType+" (15M) S:"+power;
+           string messageAlert=symbol+pType+" (15M) S:"+power+","+timepower;
          
          if(popupAlerts==Yes)
            {
@@ -1785,14 +1785,14 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
     if((iLow(symbolName,0,j) > iHigh(symbolName,0,j+2)) && (iClose(symbolName,0,j+1)>iHigh(symbolName,0,j+2)))
     {
     bullOBup[symbolIndex][j+2] = iLow(symbolName,0,j);
-    bullOBdown[symbolIndex][j+2] =iHigh(symbolName,0,j+2);
+    bullOBdown[symbolIndex][j+2] =iLow(symbolName,0,j+2);
     bullOBtime[symbolIndex][j+2] =iTime(symbolName,0,j+2);
    // Print("Formatted TimeA: ", TimeToString(bullOBtime[symbolIndex][j+2],TIME_SECONDS | TIME_DATE));
     }
     
     if((iHigh(symbolName,0,j) < iLow(symbolName,0,j+2)) && (iClose(symbolName,0,j+1) < iLow(symbolName,0,j+2)))
     {
-    bearOBup[symbolIndex][j+2] =iLow(symbolName,0,j+2);
+    bearOBup[symbolIndex][j+2] =iHigh(symbolName,0,j+2);
     bearOBdown[symbolIndex][j+2] =iHigh(symbolName,0,j);
     bearOBtime[symbolIndex][j+2] =iTime(symbolName,0,j+2);
     }    
@@ -1840,7 +1840,8 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
 
     for (int f = 0; f < 1000; f++)
     {
-    if (((iClose(symbolName,0,0)< bearOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bearOBdown[symbolIndex][f])))
+   // if (((iClose(symbolName,0,0)< bearOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bearOBdown[symbolIndex][f])))
+    if ((iHigh(symbolName,0,0)> bearOBup[symbolIndex][f]) )
     {
 
 
@@ -1848,20 +1849,21 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
    // Alert(alertMessage);
    // SendNotification(alertMessage);
 
-       FVGArrayRef[symbolIndex][0]=-1;
+       FVGArrayRef[symbolIndex][0]=1;
        FVGArrayRef[symbolIndex][1]=bearOBup[symbolIndex][f];
        FVGArrayRef[symbolIndex][2]=bearOBtime[symbolIndex][f];
     }
     
     
-    if (((iClose(symbolName,0,0)< bullOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bullOBdown[symbolIndex][f])))
+    //if (((iClose(symbolName,0,0)< bullOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bullOBdown[symbolIndex][f])))
+    if (iLow(symbolName,0,0)< bullOBdown[symbolIndex][f])
     {
    
   
     //string alertMessage1 = Symbol() + ": Price into Bull FVG";
     //Alert(alertMessage1);
    // SendNotification(alertMessage1);
-       FVGArrayRef[symbolIndex][0]=1;
+       FVGArrayRef[symbolIndex][0]=-1;
        FVGArrayRef[symbolIndex][1]=bullOBdown[symbolIndex][f];
        FVGArrayRef[symbolIndex][2]=bullOBtime[symbolIndex][f];
     }
