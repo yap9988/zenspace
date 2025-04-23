@@ -161,7 +161,9 @@ double FVGCheck[][21]; //stores all the pivot points for each timeframe
 bool PivotsFlag[][21];
 //stores the time to wait for alert time interval for each pivot points timeframe
 datetime   PivotsWaitTill[][21];
+datetime   PivotsWaitTillB[][21];
 double   FVGWaitTill[][21];
+double   FVGWaitTillB[][21];
 //stores all the bool flags to help detect price cross pivot point for each timeframe
 bool PivotsZoneFlag[][21];
 //num of pivots for each formula
@@ -541,7 +543,9 @@ void initializePivotPoints()//this method just prepares the arrays correct index
    ArrayResize(FVGCheck,numSymbols);
    ArrayResize(PivotsFlag,numSymbols);
    ArrayResize(PivotsWaitTill,numSymbols);
+   ArrayResize(PivotsWaitTillB,numSymbols);
    ArrayResize(FVGWaitTill,numSymbols);
+   ArrayResize(FVGWaitTillB,numSymbols);
    ArrayResize(PivotsZoneFlag,numSymbols);
   }
 //gets the symbol if using list
@@ -598,7 +602,10 @@ void resetVariables(int symbolIndex)//resets all pivot wait tills when new day
       PivotsFlag[symbolIndex][k]=NULL;
       PivotsZoneFlag[symbolIndex][k]=NULL;
       PivotsWaitTill[symbolIndex][k]=NULL;
+      PivotsWaitTillB[symbolIndex][k]=NULL;
       FVGWaitTill[symbolIndex][k]=NULL;
+      FVGWaitTillB[symbolIndex][k]=NULL;
+     // FVGCheck[symbolIndex][k]=NULL;
      }
   }
 //handles the alerts
@@ -1779,7 +1786,7 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
 
 
 
-  for (int j = 1000; j > 1; j--)
+  for (int j = 500; j > 1; j--)
     {
 
     if((iLow(symbolName,0,j) > iHigh(symbolName,0,j+2)) && (iClose(symbolName,0,j+1)>iHigh(symbolName,0,j+2)))
@@ -1802,15 +1809,15 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
 
 
 
-    for (int i = 0; i < 1000+2; i++)
+    for (int i = 0; i < 500+2; i++)
     {
     if ( bearOBup[symbolIndex][i] >0)
     {
     double tempup = bearOBup[symbolIndex][i];
     double tempdown = bearOBdown[symbolIndex][i];
-    for (int  h = 0; h<i-2; h++)
+    for (int  h = 1; h<i-2; h++)
     {
-    if (iHigh(symbolName,0,h)>tempup)
+    if (iHigh(symbolName,0,h)>=tempup)
     {
     bearOBup[symbolIndex][i] =0;
     bearOBdown[symbolIndex][i] =0;
@@ -1823,9 +1830,9 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
     {
     double temp2up = bullOBup[symbolIndex][i];
     double temp2down = bullOBdown[symbolIndex][i];
-    for (int  g = 0; g<i-2; g++)
+    for (int  g = 1; g<i-2; g++)
     {
-    if (iLow(symbolName,0,g)<temp2down)
+    if (iLow(symbolName,0,g)<=temp2down)
     {
     bullOBup[symbolIndex][i] =0;
     bullOBdown[symbolIndex][i] =0;
@@ -1838,10 +1845,10 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
 
 
 
-    for (int f = 0; f < 1000; f++)
+    for (int f = 0; f < 500; f++)
     {
    // if (((iClose(symbolName,0,0)< bearOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bearOBdown[symbolIndex][f])))
-    if ((iHigh(symbolName,0,0)> bearOBup[symbolIndex][f]) && (iOpen(symbolName,0,0)<bearOBup[symbolIndex][f] || iClose(symbolName,0,1)<bearOBup[symbolIndex][f] ))
+    if ((iHigh(symbolName,0,0)>= bearOBup[symbolIndex][f]) && (iOpen(symbolName,0,0)<bearOBup[symbolIndex][f] || iClose(symbolName,0,1)<bearOBup[symbolIndex][f] ))
     {
 
 
@@ -1852,11 +1859,14 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
        FVGArrayRef[symbolIndex][0]=1;
        FVGArrayRef[symbolIndex][1]=bearOBup[symbolIndex][f];
        FVGArrayRef[symbolIndex][2]=bearOBtime[symbolIndex][f];
+       break;
+    }
     }
     
-    
+   for (int e = 0; e < 500; e++)
+    {
     //if (((iClose(symbolName,0,0)< bullOBup[symbolIndex][f]) &&(iClose(symbolName,0,0)> bullOBdown[symbolIndex][f])))
-    if (iLow(symbolName,0,0)< bullOBdown[symbolIndex][f]&& (iOpen(symbolName,0,0)>bullOBdown[symbolIndex][f] || iClose(symbolName,0,1)>bullOBdown[symbolIndex][f] ))
+    if (iLow(symbolName,0,0)<= bullOBdown[symbolIndex][e]&& (iOpen(symbolName,0,0)>bullOBdown[symbolIndex][e] || iClose(symbolName,0,1)>bullOBdown[symbolIndex][e] ))
     {
    
   
@@ -1864,8 +1874,9 @@ void calculatekama(ENUM_TIMEFRAMES timeFrame,double &FVGArrayRef[][],int symbolI
     //Alert(alertMessage1);
    // SendNotification(alertMessage1);
        FVGArrayRef[symbolIndex][0]=-1;
-       FVGArrayRef[symbolIndex][1]=bullOBdown[symbolIndex][f];
-       FVGArrayRef[symbolIndex][2]=bullOBtime[symbolIndex][f];
+       FVGArrayRef[symbolIndex][1]=bullOBdown[symbolIndex][e];
+       FVGArrayRef[symbolIndex][2]=bullOBtime[symbolIndex][e];
+    break;
     }
     
     
@@ -2469,27 +2480,33 @@ void PivotCheck(int symbolIndex, int numOfPivotPoints,bool &showRef[],string &pi
                  
                  
                  
-                 if (pivotSelection == FVG && Time[0] != PivotsWaitTill[symbolIndex][j]  && FVGCheck[symbolIndex][0] > 0 )
+                 if (pivotSelection == FVG && Time[0] != PivotsWaitTill[symbolIndex][j]  && FVGCheck[symbolIndex][0] > 0 && FVGWaitTill[symbolIndex][j] != FVGCheck[symbolIndex][1])
                  //if (pivotSelection==FVG && TimeCurrent()>=PivotsWaitTill[symbolIndex][j] && FVGCheck[symbolIndex][0]>0 && FVGWaitTill[symbolIndex][j] != FVGCheck[symbolIndex][1]) //something logic checking here, try revising trdacheck/calculatetrda
                  {
                         PivotsWaitTill[symbolIndex][j] = Time[0]; // Save this candle time
 
                        // PivotsWaitTill[symbolIndex][j]=(TimeCurrent()+alertIntervalTimeSeconds);
-                        //FVGWaitTill[symbolIndex][j] = FVGCheck[symbolIndex][1];
+                        FVGWaitTill[symbolIndex][j] = FVGCheck[symbolIndex][1];
                         doAlertFVG2(symbolName,ppTimeFrame,pivotNamesRef[j],1,symbolIndex,FVGCheck[symbolIndex][1],FVGCheck[symbolIndex][2]); 
                         //doAlertFVG(symbolName,ppTimeFrame,pivotNamesRef[j],1,symbolIndex); 
                         Print(symbolName,"Bull",FVGCheck[symbolIndex][1]); 
+                        FVGCheck[symbolIndex][0]=0;
+                        FVGCheck[symbolIndex][1]=0;
+                        FVGCheck[symbolIndex][2]=0;
                  }
-                 if (pivotSelection == FVG && Time[0] != PivotsWaitTill[symbolIndex][j]  && FVGCheck[symbolIndex][0] < 0 )
-                 //if (pivotSelection==FVG && TimeCurrent()>=PivotsWaitTill[symbolIndex][j]&& FVGCheck[symbolIndex][0]<0&& FVGWaitTill[symbolIndex][j] != FVGCheck[symbolIndex][1]) //something logic checking here, try revising trdacheck/calculatetrda
+                 if (pivotSelection == FVG && Time[0] != PivotsWaitTillB[symbolIndex][j]  && FVGCheck[symbolIndex][0] < 0 && FVGWaitTillB[symbolIndex][j] != FVGCheck[symbolIndex][1])
+                 //if (pivotSelection==FVG && TimeCurrent()>=PivotsWaitBTill[symbolIndex][j]&& FVGCheck[symbolIndex][0]<0&& FVGWaitTill[symbolIndex][j] != FVGCheck[symbolIndex][1]) //something logic checking here, try revising trdacheck/calculatetrda
                  {
-                        PivotsWaitTill[symbolIndex][j] = Time[0]; // Save this candle time
+                        PivotsWaitTillB[symbolIndex][j] = Time[0]; // Save this candle time
 
-                        //PivotsWaitTill[symbolIndex][j]=(TimeCurrent()+alertIntervalTimeSeconds);
-                        //FVGWaitTill[symbolIndex][j] = FVGCheck[symbolIndex][1];
+                        //PivotsWaitBTill[symbolIndex][j]=(TimeCurrent()+alertIntervalTimeSeconds);
+                        FVGWaitTillB[symbolIndex][j] = FVGCheck[symbolIndex][1];
                         doAlertFVG2(symbolName,ppTimeFrame,pivotNamesRef[j],-1,symbolIndex,FVGCheck[symbolIndex][1],FVGCheck[symbolIndex][2]); 
                         //doAlertFVG(symbolName,ppTimeFrame,pivotNamesRef[j],-1,symbolIndex); 
                         Print(symbolName,"Bear",FVGCheck[symbolIndex][1]); 
+                        FVGCheck[symbolIndex][0]=0;
+                        FVGCheck[symbolIndex][1]=0;
+                        FVGCheck[symbolIndex][2]=0;
                  }
                  
            }//end of
