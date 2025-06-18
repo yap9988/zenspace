@@ -1,1 +1,4 @@
-1HSword Lvl50 Fast WA67|500000|1hsword50fastwa67.png
+Bowman Overall Lvl50 Str 5|500000|bowmanoverall50str5.png
+Bowman Overall Lvl50 Str 7|500000|bowmanoverall50str7.png
+Bowman Shoe Lvl40 Str 4|500000|bowmanshoe40str4.png
+Warrior Overall Lvl35 Dex 14|500000|warrioroverall35dex14.png
