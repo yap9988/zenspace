@@ -1,0 +1,1 @@
+https://www.tradingview.com/x/wBNOmgI9/
